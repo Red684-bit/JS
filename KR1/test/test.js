@@ -13,16 +13,16 @@ describe('Контрольная работа №1', function () {
 
     describe('Метод last()', function () {
 
+      it('Возвращает 0 если операций не было', function () {
+        expect(calc.last()).to.equal(0);
+      });
+
       it('Возвращает результат последней операции', function () {
         calc.add(5, 5);
         expect(calc.last()).to.equal(10);
 
         calc.div(10, 3);
         expect(calc.last()).to.equal(3.33);
-      });
-
-      it('Возвращает 0 если операций не было', function () {
-        expect(calc.last()).to.equal(0);
       });
   });
 
@@ -130,6 +130,19 @@ describe('Контрольная работа №1', function () {
       });
     });
 
+      describe('Метод clear()', function () {
+
+        it('Очищает историю и сбрасывает last result', function () {
+          calc.add(5, 5);
+          calc.mult(2);
+
+          calc.clear();
+
+          expect(calc.last()).to.equal(0);
+          expect(calc.showHistory().trim()).to.equal('История пуста');
+        });
+      });
+
       describe('Вызов методов с одним аргументом', function () {
 
       it('add() c изначальным значением, add() с одним аргументом', function () {
@@ -209,19 +222,6 @@ describe('Контрольная работа №1', function () {
       expect(historyOutput).to.not.include('3 * 5');
     });
   });
-
-        describe('Метод clear()', function () {
-
-      it('Очищает историю и сбрасывает last result', function () {
-        calc.add(5, 5);
-        calc.mult(2);
-
-        calc.clear();
-
-        expect(calc.last()).to.equal(0);
-        expect(calc.showHistory().trim()).to.equal('История пуста');
-      });
-    });
 
     describe('Метод undo()', function () {
 
